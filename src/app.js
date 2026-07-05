@@ -1,3 +1,9 @@
+const baseURL =
+  window.location.hostname === "localhost" ||
+  window.location.hostname === "127.0.0.1"
+    ? "http://localhost:5000/api/chat"
+    : "/api/chat";
+
 // --- Persona Style & Static Configuration ---
 const personaEngine = {
   hitesh: {
@@ -122,7 +128,7 @@ messageForm.addEventListener("submit", async (e) => {
 
   try {
     // 3. Dispatch payload processing request to the Node server
-    const response = await fetch('http://localhost:5000/api/chat', {
+    const response = await fetch(`${baseURL}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
