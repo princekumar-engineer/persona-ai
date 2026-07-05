@@ -1,11 +1,19 @@
-const express = require('express');
-const cors = require('cors');
-require('dotenv').config();
-const { GoogleGenAI } = require('@google/genai');
+const express = require("express");
+const cors = require("cors");
+require("dotenv").config();
+const { GoogleGenAI } = require("@google/genai");
+const path = require("path");
 
 const app = express();
+
 app.use(cors());
 app.use(express.json());
+
+app.use(express.static(path.join(__dirname, "../")));
+
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "../index.html"));
+});
 
 // Initialize the official Google Gen AI SDK 
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
